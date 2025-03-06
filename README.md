@@ -15,7 +15,18 @@ A minimalist, elegant birthday reminder application that helps you remember and 
 
 ## 🎨 Screenshots
 
-![YoHoo App Screenshot](screenshot.jpeg)
+![YoHoo Home Page](home.jpeg)
+
+<details>
+<summary>Click to see more screenshots</summary>
+
+![YoHoo Contacts Page](screenshot.jpeg)
+![YoHoo GIFs Page](gifs.jpeg)
+![YoHoo Send Message Page](send-message.jpeg)
+![YoHoo Settings Page](settings.jpeg)
+![YoHoo Wishes Page](wishes.jpeg)
+
+</details>
 
 ## 🛠 Technologies/Libraries Used
 
