@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+
+{% block title %}BirthdayBuddy - Birthday Wishes{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2><i class="fas fa-comment-dots me-2"></i>Birthday Wishes</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{{ url_for('add_wish') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Add New Wish
+        </a>
+    </div>
+</div>
+
+{% if wishes %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0">Saved Wishes</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Message</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for wish in wishes %}
+                            <tr>
+                                <td>{{ wish.id }}</td>
+                                <td>{{ wish.message }}</td>
+                                <td>
+                                    {% if wish.category %}
+                                    <span class="badge bg-info">{{ wish.category }}</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">General</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary copy-wish" data-message="{{ wish.message }}">
+                                        <i class="fas fa-copy me-1"></i> Copy
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">
+    <p>You don't have any saved birthday wishes yet. Add your first wish to get started!</p>
+    <a href="{{ url_for('add_wish') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i> Add New Wish
+    </a>
+</div>
+{% endif %}
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-random me-2"></i>Random Wish Generator</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="wish-category">
+                        <option value="">All Categories</option>
+                        <option value="general">General</option>
+                        <option value="funny">Funny</option>
+                        <option value="heartfelt">Heartfelt</option>
+                    </select>
+                </div>
+                <button id="generate-wish-btn" class="btn btn-primary">
+                    <i class="fas fa-magic me-1"></i> Generate Random Wish
+                </button>
+                
+                <div class="mt-3" id="random-wish-result" style="display: none;">
+                    <div class="alert alert-info">
+                        <p id="random-wish-text"></p>
+                        <button class="btn btn-sm btn-outline-primary copy-wish-result">
+                            <i class="fas fa-copy me-1"></i> Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-lightbulb me-2"></i>Wish Ideas</h4>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="wishIdeasAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                General Birthday Wishes
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#wishIdeasAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Wishing you a day filled with happiness and a year filled with joy.</li>
+                                    <li class="list-group-item">Sending you smiles for every moment of your special day.</li>
+                                    <li class="list-group-item">Hope your special day brings you all that your heart desires!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                Funny Birthday Wishes
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#wishIdeasAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">You're not getting older, you're just becoming a classic!</li>
+                                    <li class="list-group-item">Age is merely the number of years the world has been enjoying you!</li>
+                                    <li class="list-group-item">Don't worry about getting another year older! Our friendship is so old it's starting to grow mold!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                Heartfelt Birthday Wishes
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#wishIdeasAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">On your birthday, I celebrate you and the special place you have in my heart.</li>
+                                    <li class="list-group-item">Your friendship has been a gift in my life. Wishing you a birthday as wonderful as you are.</li>
+                                    <li class="list-group-item">May your birthday be as beautiful as your heart and as lovely as your smile.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Generate random wish
+        $('#generate-wish-btn').click(function() {
+            const category = $('#wish-category').val();
+            let url = "{{ url_for('random_wish') }}";
+            
+            if (category) {
+                url += `?category=${category}`;
+            }
+            
+            $.get(url, function(data) {
+                $('#random-wish-text').text(data.message);
+                $('#random-wish-result').slideDown();
+            });
+        });
+        
+        // Copy wish to clipboard
+        $('.copy-wish').click(function() {
+            const message = $(this).data('message');
+            navigator.clipboard.writeText(message).then(function() {
+                alert('Wish copied to clipboard!');
+            });
+        });
+        
+        // Copy random wish result
+        $('.copy-wish-result').click(function() {
+            const message = $('#random-wish-text').text();
+            navigator.clipboard.writeText(message).then(function() {
+                alert('Wish copied to clipboard!');
+            });
+        });
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}BirthdayBuddy - Add Birthday Wish{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-comment-medical me-2"></i>Add New Birthday Wish</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Birthday Wish Message <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category">
+                            <option value="general">General</option>
+                            <option value="funny">Funny</option>
+                            <option value="heartfelt">Heartfelt</option>
+                            <option value="professional">Professional</option>
+                            <option value="family">Family</option>
+                            <option value="friend">Friend</option>
+                        </select>
+                        <div class="form-text">Categorize your wish to make it easier to find later.</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('wishes') }}" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save Wish</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-lightbulb me-2"></i>Wish Ideas</h4>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="wishIdeasAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                General Birthday Wishes
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#wishIdeasAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Wishing you a day filled with happiness and a year filled with joy.
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Sending you smiles for every moment of your special day.
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Hope your special day brings you all that your heart desires!
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                Funny Birthday Wishes
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#wishIdeasAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        You're not getting older, you're just becoming a classic!
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Age is merely the number of years the world has been enjoying you!
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Don't worry about getting another year older! Our friendship is so old it's starting to grow mold!
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                Heartfelt Birthday Wishes
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#wishIdeasAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        On your birthday, I celebrate you and the special place you have in my heart.
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Your friendship has been a gift in my life. Wishing you a birthday as wonderful as you are.
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        May your birthday be as beautiful as your heart and as lovely as your smile.
+                                        <button class="btn btn-sm btn-outline-primary use-wish-btn">Use</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Use wish from ideas
+        $('.use-wish-btn').click(function() {
+            const wishText = $(this).parent().text().trim().replace('Use', '').trim();
+            $('#message').val(wishText);
+            
+            // Auto-select category based on which accordion is open
+            if ($('#collapseOne').hasClass('show')) {
+                $('#category').val('general');
+            } else if ($('#collapseTwo').hasClass('show')) {
+                $('#category').val('funny');
+            } else if ($('#collapseThree').hasClass('show')) {
+                $('#category').val('heartfelt');
+            }
+            
+            // Scroll back to form
+            $('html, body').animate({
+                scrollTop: $("#message").offset().top - 100
+            }, 500);
+        });
+    });
+</script>
+{% endblock %} 

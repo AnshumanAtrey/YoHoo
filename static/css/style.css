@@ -1,0 +1,297 @@
+/* YoHoo - Main Stylesheet */
+
+/* Global Styles */
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    margin-top: auto;
+    background-color: #1a1a1a;
+    border-top: 1px solid #333;
+}
+
+/* Default Theme (Dark) */
+.navbar {
+    background: #6200ee !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #6200ee !important;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    border-bottom: none;
+}
+
+.card-body {
+    color: #e0e0e0;
+}
+
+.card-footer {
+    background-color: #252525;
+    border-top: 1px solid #333;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #6200ee;
+    border-color: #6200ee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #7c4dff;
+    border-color: #7c4dff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline-primary {
+    color: #bb86fc;
+    border-color: #bb86fc;
+}
+
+.btn-outline-primary:hover {
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+    color: #121212;
+}
+
+.btn {
+    border-radius: 0.25rem;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+}
+
+/* Countdown Styles */
+.countdown-container {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgba(30, 30, 30, 0.7);
+}
+
+.countdown-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #bb86fc;
+}
+
+.countdown-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #9e9e9e;
+}
+
+/* Profile Images */
+.rounded-circle {
+    object-fit: cover;
+    border: 3px solid #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Form Controls */
+.form-control,
+.form-select {
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    color: #e0e0e0;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #333;
+    border-color: #bb86fc;
+    box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25);
+    color: #ffffff;
+}
+
+.form-control::placeholder {
+    color: #9e9e9e;
+}
+
+.form-text {
+    color: #9e9e9e;
+}
+
+/* Badge Styles */
+.badge {
+    font-weight: normal;
+    padding: 0.5em 0.75em;
+    border-radius: 0.25rem;
+}
+
+.badge.bg-primary {
+    background-color: #6200ee !important;
+}
+
+.badge.bg-success {
+    background-color: #03dac6 !important;
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.alert-info {
+    background-color: #1e3a5f;
+    border-color: #1e3a5f;
+    color: #e0e0e0;
+}
+
+.alert-success {
+    background-color: #1e4a3d;
+    border-color: #1e4a3d;
+    color: #e0e0e0;
+}
+
+.alert-warning {
+    background-color: #4d3b00;
+    border-color: #4d3b00;
+    color: #e0e0e0;
+}
+
+.alert-danger {
+    background-color: #4a1e1e;
+    border-color: #4a1e1e;
+    color: #e0e0e0;
+}
+
+/* Table Styles */
+.table {
+    color: #e0e0e0;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(187, 134, 252, 0.1);
+}
+
+/* Accordion Styles */
+.accordion-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+.accordion-button {
+    background-color: #252525;
+    color: #e0e0e0;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #3a1f5e;
+    color: #bb86fc;
+}
+
+.accordion-button:focus {
+    border-color: #bb86fc;
+    box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25);
+}
+
+.accordion-button::after {
+    filter: invert(1);
+}
+
+.list-group-item {
+    background-color: #252525;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+/* Navbar Brand */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #bb86fc;
+}
+
+/* Links */
+a {
+    color: #bb86fc;
+}
+
+a:hover {
+    color: #d7b8ff;
+}
+
+.text-muted {
+    color: #9e9e9e !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bb86fc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d7b8ff;
+} 

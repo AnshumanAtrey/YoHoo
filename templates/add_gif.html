@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}BirthdayBuddy - Add GIF{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-image me-2"></i>Add New GIF</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="url" class="form-label">GIF URL <span class="text-danger">*</span></label>
+                        <input type="url" class="form-control" id="url" name="url" required>
+                        <div class="form-text">Enter the direct URL to the GIF image.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category">
+                            <option value="general">General</option>
+                            <option value="funny">Funny</option>
+                            <option value="heartfelt">Heartfelt</option>
+                            <option value="cake">Cake</option>
+                            <option value="balloons">Balloons</option>
+                            <option value="confetti">Confetti</option>
+                        </select>
+                        <div class="form-text">Categorize your GIF to make it easier to find later.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="is_custom" name="is_custom" value="true" checked>
+                            <label class="form-check-label" for="is_custom">
+                                This is a custom GIF (added by me)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3" id="gif-preview-container" style="display: none;">
+                        <label class="form-label">GIF Preview</label>
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <img id="gif-preview" src="" alt="GIF Preview" class="img-fluid" style="max-height: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('gifs') }}" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save GIF</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-search me-2"></i>Find GIFs Online</h4>
+            </div>
+            <div class="card-body">
+                <p>You can find birthday GIFs on these popular websites:</p>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        <a href="https://giphy.com/search/happy-birthday" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-external-link-alt me-1"></i> GIPHY - Happy Birthday
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="https://tenor.com/search/happy-birthday-gifs" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-external-link-alt me-1"></i> Tenor - Happy Birthday
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="https://gfycat.com/gifs/search/happy+birthday" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-external-link-alt me-1"></i> Gfycat - Happy Birthday
+                        </a>
+                    </li>
+                </ul>
+                <div class="alert alert-info">
+                    <p><i class="fas fa-info-circle me-1"></i> How to get a GIF URL:</p>
+                    <ol>
+                        <li>Find a GIF you like on one of the websites above</li>
+                        <li>Right-click on the GIF and select "Copy image address" or "Copy image URL"</li>
+                        <li>Paste the URL in the form above</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Preview GIF when URL is entered
+        $('#url').on('input', function() {
+            const url = $(this).val();
+            if (url) {
+                $('#gif-preview').attr('src', url);
+                $('#gif-preview-container').slideDown();
+            } else {
+                $('#gif-preview-container').slideUp();
+            }
+        });
+    });
+</script>
+{% endblock %} 

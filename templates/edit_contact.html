@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}BirthdayBuddy - Edit Contact{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-edit me-2"></i>Edit Contact</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ contact.name }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ contact.email }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{ contact.phone or '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="birthday" class="form-label">Birthday <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="birthday" name="birthday" value="{{ contact.birthday.strftime('%Y-%m-%d') }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="profile_pic" class="form-label">Profile Picture</label>
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <img src="{{ url_for('static', filename='uploads/' + contact.profile_pic) }}" 
+                                     alt="{{ contact.name }}" 
+                                     class="rounded-circle" 
+                                     width="60" height="60">
+                            </div>
+                            <div class="col">
+                                <input type="file" class="form-control" id="profile_pic" name="profile_pic" accept="image/*">
+                                <div class="form-text">Upload a new profile picture (optional). Max size: 16MB.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="custom_message" class="form-label">Custom Birthday Message</label>
+                        <textarea class="form-control" id="custom_message" name="custom_message" rows="3">{{ contact.custom_message or '' }}</textarea>
+                        <div class="form-text">Add a personalized birthday message for this contact (optional).</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('contacts') }}" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update Contact</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

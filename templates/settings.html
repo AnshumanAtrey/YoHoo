@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ app_name }} - Settings{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2><i class="fas fa-cog me-2"></i>Settings</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-envelope me-2"></i>Email Settings</h4>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="your.email@gmail.com">
+                        <div class="form-text">This email will be used to send birthday wishes.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">App Password</label>
+                        <input type="password" class="form-control" id="password">
+                        <div class="form-text">
+                            For Gmail, you need to use an <a href="https://support.google.com/accounts/answer/185833" target="_blank">App Password</a>.
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-1"></i> Email settings are stored locally in a .env file for security reasons.
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="button" class="btn btn-primary" id="save-email-settings">
+                            <i class="fas fa-save me-1"></i> Save Email Settings
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-bell me-2"></i>Notification Settings</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="email-notifications" checked>
+                    <label class="form-check-label" for="email-notifications">
+                        Email Notifications
+                    </label>
+                    <div class="form-text">Receive email notifications for upcoming birthdays.</div>
+                </div>
+                
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="browser-notifications">
+                    <label class="form-check-label" for="browser-notifications">
+                        Browser Notifications
+                    </label>
+                    <div class="form-text">Receive browser notifications for upcoming birthdays.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Notification Time</label>
+                    <select class="form-select" id="notification-time">
+                        <option value="1">1 day before</option>
+                        <option value="2">2 days before</option>
+                        <option value="3">3 days before</option>
+                        <option value="7">1 week before</option>
+                    </select>
+                </div>
+                
+                <div class="d-grid">
+                    <button type="button" class="btn btn-primary" id="save-notification-settings">
+                        <i class="fas fa-save me-1"></i> Save Notification Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-info-circle me-2"></i>About</h4>
+            </div>
+            <div class="card-body">
+                <p>{{ app_name }} is a minimalist birthday reminder application designed to help you never forget important birthdays.</p>
+                <p>Version: 1.0.0</p>
+                <p>Created with <i class="fas fa-heart text-danger"></i> using Python and Flask.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Save email settings
+        $('#save-email-settings').click(function() {
+            alert('Email settings would be saved to .env file in a real application.');
+        });
+        
+        // Save notification settings
+        $('#save-notification-settings').click(function() {
+            alert('Notification settings saved!');
+        });
+        
+        // Browser notification permission
+        $('#browser-notifications').change(function() {
+            if ($(this).is(':checked')) {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission !== 'granted') {
+                        alert('Please allow notifications to enable this feature.');
+                        $('#browser-notifications').prop('checked', false);
+                    }
+                });
+            }
+        });
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,238 @@
+/* YoHoo - Dark Theme Stylesheet */
+
+/* Dark Theme Base */
+.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Navbar */
+.dark-theme .navbar {
+    background: #6200ee !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Cards */
+.dark-theme .card {
+    background-color: #1e1e1e;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .card-header {
+    background-color: #6200ee !important;
+    color: #ffffff;
+    border-bottom: none;
+}
+
+.dark-theme .card-body {
+    color: #e0e0e0;
+}
+
+.dark-theme .card-footer {
+    background-color: #252525;
+    border-top: 1px solid #333;
+}
+
+/* Buttons */
+.dark-theme .btn-primary {
+    background-color: #6200ee;
+    border-color: #6200ee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .btn-primary:hover {
+    background-color: #7c4dff;
+    border-color: #7c4dff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .btn-outline-primary {
+    color: #bb86fc;
+    border-color: #bb86fc;
+}
+
+.dark-theme .btn-outline-primary:hover {
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+    color: #121212;
+}
+
+.dark-theme .btn-outline-secondary {
+    color: #b0b0b0;
+    border-color: #505050;
+}
+
+.dark-theme .btn-outline-secondary:hover {
+    background-color: #505050;
+    border-color: #505050;
+    color: #e0e0e0;
+}
+
+/* Text and Links */
+.dark-theme .text-muted {
+    color: #9e9e9e !important;
+}
+
+.dark-theme a {
+    color: #bb86fc;
+}
+
+.dark-theme a:hover {
+    color: #d7b8ff;
+}
+
+/* Form Controls */
+.dark-theme .form-control,
+.dark-theme .form-select {
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    color: #e0e0e0;
+}
+
+.dark-theme .form-control:focus,
+.dark-theme .form-select:focus {
+    background-color: #333;
+    border-color: #bb86fc;
+    box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25);
+    color: #ffffff;
+}
+
+.dark-theme .form-control::placeholder {
+    color: #9e9e9e;
+}
+
+.dark-theme .form-text {
+    color: #9e9e9e;
+}
+
+/* Tables */
+.dark-theme .table {
+    color: #e0e0e0;
+}
+
+.dark-theme .table-hover tbody tr:hover {
+    background-color: rgba(187, 134, 252, 0.1);
+}
+
+/* Alerts */
+.dark-theme .alert-info {
+    background-color: #1e3a5f;
+    border-color: #1e3a5f;
+    color: #e0e0e0;
+}
+
+.dark-theme .alert-success {
+    background-color: #1e4a3d;
+    border-color: #1e4a3d;
+    color: #e0e0e0;
+}
+
+.dark-theme .alert-warning {
+    background-color: #4d3b00;
+    border-color: #4d3b00;
+    color: #e0e0e0;
+}
+
+.dark-theme .alert-danger {
+    background-color: #4a1e1e;
+    border-color: #4a1e1e;
+    color: #e0e0e0;
+}
+
+/* Badges */
+.dark-theme .badge.bg-primary {
+    background-color: #6200ee !important;
+}
+
+.dark-theme .badge.bg-secondary {
+    background-color: #505050 !important;
+}
+
+.dark-theme .badge.bg-success {
+    background-color: #03dac6 !important;
+}
+
+.dark-theme .badge.bg-info {
+    background-color: #3d5afe !important;
+}
+
+/* Countdown */
+.dark-theme .countdown-container {
+    background-color: rgba(30, 30, 30, 0.7);
+}
+
+.dark-theme .countdown-value {
+    color: #bb86fc;
+}
+
+.dark-theme .countdown-label {
+    color: #9e9e9e;
+}
+
+/* Footer */
+.dark-theme .footer {
+    background-color: #1a1a1a !important;
+    color: #9e9e9e;
+    border-top: 1px solid #333;
+}
+
+/* Accordion */
+.dark-theme .accordion-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+.dark-theme .accordion-button {
+    background-color: #252525;
+    color: #e0e0e0;
+}
+
+.dark-theme .accordion-button:not(.collapsed) {
+    background-color: #3a1f5e;
+    color: #bb86fc;
+}
+
+.dark-theme .accordion-button::after {
+    filter: invert(1);
+}
+
+.dark-theme .list-group-item {
+    background-color: #252525;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+/* Headings */
+.dark-theme .navbar-brand,
+.dark-theme h1, 
+.dark-theme h2, 
+.dark-theme h3, 
+.dark-theme h4, 
+.dark-theme h5, 
+.dark-theme h6 {
+    color: #bb86fc;
+}
+
+/* Profile Images */
+.dark-theme .rounded-circle {
+    border: 3px solid #333;
+}
+
+/* Custom Scrollbar */
+.dark-theme ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+    background: #bb86fc;
+    border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+    background: #d7b8ff;
+} 

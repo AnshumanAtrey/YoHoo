@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}BirthdayBuddy - Send Birthday Wish{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-envelope me-2"></i>Send Birthday Wish to {{ contact.name }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-4 text-center">
+                        <img src="{{ url_for('static', filename='uploads/' + contact.profile_pic) }}" 
+                             alt="{{ contact.name }}" 
+                             class="rounded-circle mb-3" 
+                             width="120" height="120">
+                        <h5>{{ contact.name }}</h5>
+                        <p class="text-muted">
+                            <i class="fas fa-envelope me-1"></i> {{ contact.email }}<br>
+                            <i class="fas fa-birthday-cake me-1"></i> {{ contact.birthday.strftime('%b %d') }}
+                        </p>
+                    </div>
+                    <div class="col-md-8">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Birthday Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="5">{{ contact.custom_message or random_wish }}</textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Select a GIF (Optional)</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="gif_url" name="gif_url" placeholder="GIF URL" value="{{ random_gif or '' }}">
+                                    <button class="btn btn-outline-secondary" type="button" id="random-gif-btn">
+                                        <i class="fas fa-random"></i> Random GIF
+                                    </button>
+                                </div>
+                                
+                                <div id="gif-preview-container" class="text-center mt-3" {% if not random_gif %}style="display: none;"{% endif %}>
+                                    <div class="card">
+                                        <div class="card-header">GIF Preview</div>
+                                        <div class="card-body">
+                                            <img id="gif-preview" src="{{ random_gif or '' }}" alt="GIF Preview" class="img-fluid" style="max-height: 200px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{{ url_for('contacts') }}" class="btn btn-outline-secondary me-md-2">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Send Birthday Wish</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Random GIF generator
+        $('#random-gif-btn').click(function() {
+            $.get("{{ url_for('random_gif') }}", function(data) {
+                if (data.url) {
+                    $('#gif_url').val(data.url);
+                    $('#gif-preview').attr('src', data.url);
+                    $('#gif-preview-container').slideDown();
+                }
+            });
+        });
+        
+        // Update preview when GIF URL changes
+        $('#gif_url').on('input', function() {
+            const url = $(this).val();
+            if (url) {
+                $('#gif-preview').attr('src', url);
+                $('#gif-preview-container').slideDown();
+            } else {
+                $('#gif-preview-container').slideUp();
+            }
+        });
+    });
+</script>
+{% endblock %} 

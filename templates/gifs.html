@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% block title %}BirthdayBuddy - GIF Collection{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2><i class="fas fa-images me-2"></i>GIF Collection</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{{ url_for('add_gif') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Add New GIF
+        </a>
+    </div>
+</div>
+
+{% if gifs %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0">Saved GIFs</h4>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {% for gif in gifs %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                {% if gif.category %}
+                                <span class="badge bg-info">{{ gif.category }}</span>
+                                {% else %}
+                                <span class="badge bg-secondary">General</span>
+                                {% endif %}
+                                
+                                {% if gif.is_custom %}
+                                <span class="badge bg-success">Custom</span>
+                                {% endif %}
+                            </div>
+                            <div class="card-body text-center">
+                                <img src="{{ gif.url }}" alt="Birthday GIF" class="img-fluid" style="max-height: 200px;">
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-sm btn-outline-primary copy-gif-url" data-url="{{ gif.url }}">
+                                        <i class="fas fa-copy me-1"></i> Copy URL
+                                    </button>
+                                    <a href="{{ url_for('send_wish', id=1) }}?gif_url={{ gif.url }}" class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-envelope me-1"></i> Use in Wish
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">
+    <p>You don't have any saved GIFs yet. Add your first GIF to get started!</p>
+    <a href="{{ url_for('add_gif') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i> Add New GIF
+    </a>
+</div>
+{% endif %}
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-random me-2"></i>Random GIF Generator</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="gif-category">
+                        <option value="">All Categories</option>
+                        <option value="general">General</option>
+                        <option value="funny">Funny</option>
+                        <option value="heartfelt">Heartfelt</option>
+                    </select>
+                </div>
+                <button id="generate-gif-btn" class="btn btn-primary">
+                    <i class="fas fa-magic me-1"></i> Generate Random GIF
+                </button>
+                
+                <div class="mt-3" id="random-gif-result" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">Random GIF</div>
+                        <div class="card-body text-center">
+                            <img id="random-gif-preview" src="" alt="Random GIF" class="img-fluid" style="max-height: 200px;">
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-sm btn-outline-primary copy-random-gif-url">
+                                    <i class="fas fa-copy me-1"></i> Copy URL
+                                </button>
+                                <button class="btn btn-sm btn-outline-success" id="use-random-gif-btn">
+                                    <i class="fas fa-envelope me-1"></i> Use in Wish
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="my-0"><i class="fas fa-search me-2"></i>Find GIFs Online</h4>
+            </div>
+            <div class="card-body">
+                <p>You can find birthday GIFs on these popular websites:</p>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        <a href="https://giphy.com/search/happy-birthday" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-external-link-alt me-1"></i> GIPHY - Happy Birthday
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="https://tenor.com/search/happy-birthday-gifs" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-external-link-alt me-1"></i> Tenor - Happy Birthday
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="https://gfycat.com/gifs/search/happy+birthday" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-external-link-alt me-1"></i> Gfycat - Happy Birthday
+                        </a>
+                    </li>
+                </ul>
+                <div class="alert alert-info">
+                    <small><i class="fas fa-info-circle me-1"></i> Find a GIF you like, copy its URL, and add it to your collection!</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Generate random GIF
+        $('#generate-gif-btn').click(function() {
+            const category = $('#gif-category').val();
+            let url = "{{ url_for('random_gif') }}";
+            
+            if (category) {
+                url += `?category=${category}`;
+            }
+            
+            $.get(url, function(data) {
+                if (data.url) {
+                    $('#random-gif-preview').attr('src', data.url);
+                    $('#random-gif-result').slideDown();
+                    
+                    // Update the "Use in Wish" button
+                    $('#use-random-gif-btn').attr('data-url', data.url);
+                } else {
+                    alert('No GIFs found in this category. Please try another category or add some GIFs first.');
+                }
+            });
+        });
+        
+        // Copy GIF URL to clipboard
+        $('.copy-gif-url').click(function() {
+            const url = $(this).data('url');
+            navigator.clipboard.writeText(url).then(function() {
+                alert('GIF URL copied to clipboard!');
+            });
+        });
+        
+        // Copy random GIF URL
+        $('.copy-random-gif-url').click(function() {
+            const url = $('#random-gif-preview').attr('src');
+            navigator.clipboard.writeText(url).then(function() {
+                alert('GIF URL copied to clipboard!');
+            });
+        });
+        
+        // Use random GIF in wish
+        $('#use-random-gif-btn').click(function() {
+            const url = $('#random-gif-preview').attr('src');
+            if (url) {
+                window.location.href = "{{ url_for('contacts') }}";
+                // Note: In a real app, we'd redirect to a specific contact's send_wish page
+                // or store this in session for later use
+            }
+        });
+    });
+</script>
+{% endblock %} 
